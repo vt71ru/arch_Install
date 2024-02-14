@@ -4,8 +4,12 @@
 # --------------------------------
 # author    : Virus_Man
 #             
-# project   : 
+# project   : ArchInst
 #             
 # license   : LGPL-3.0 (http://opensource.org/licenses/lgpl-3.0.html)
 #
 # reference : https://wiki.archlinux.org/index.php/Installation_guide
+
+
+apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
+baseurl=
