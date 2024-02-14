@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Arch Linux Fast Install 
 # --------------------------------
@@ -13,3 +13,7 @@
 
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
+
+
+#Begin install
+echo "Begin install..............."
