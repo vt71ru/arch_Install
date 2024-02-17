@@ -1,14 +1,39 @@
 Just a simple bash script wizard to install Arch Linux after you have booted on the official Arch Linux install media.
 
-## How to use
+### How to use
 
-First, boot with the [last Arch Linux image](https://www.archlinux.org/download/) with a [bootable device](https://wiki.archlinux.org/index.php/USB_flash_installation_media).
+1. boot with the [last Arch Linux image](https://www.archlinux.org/download/) with a [bootable device](https://wiki.archlinux.org/index.php/USB_flash_installation_media).
+   
+For ethernet just plug your ethernet cable.
 
-Then make sure you have Internet connection on the Arch iso. If you have a wireless connection the [`iwctl`](https://wiki.archlinux.org/index.php/Iwd#iwctl) command might be useful to you. 
-You can also read the [Network configuration](https://wiki.archlinux.org/index.php/Network_configuration) from the Arch Linux guide for more detailed instructions.
+For [Wifi connection check here](https://wiki.archlinux.org/title/Iwd#iwctl).
 
-Since I am making this script only for myself, it is located in the FTP folder on my home router.
+For [mobile broadband connection check here](https://wiki.archlinux.org/title/Mobile_broadband_modem#ModemManager).
 
-You can download it with the following command
 
-##curl -u user:password -O ftp://192.168.1.1/archinstall
+### *Note: filenames must be same as original. Changing the filename when downloading script breaks the script.*
+
+2. Install git in your live media and clone [this](https://github.com/whoisYoges/magic-arch-installer) repository in your installation media.
+```
+pacman -Sy --needed --noconfirm git && \
+git clone https://github.com/whoisYoges/magic-arch-installer
+```
+
+3. Go to magic-arch-installer directory and execute the installer script.
+```
+cd magic-arch-installer
+```
+- 3a. For UEFI installatios:
+ ```
+ chmod +x uefi-base-install.sh && \
+ ./uefi-base-install.sh
+ ```
+ 
+- 3b. For Legacy installatios:
+ ```
+ chmod +x legacy-base-install.sh && \
+ ./legacy-base-install.sh
+ ```
+
+### This does the base installation of arch (without GUI) in your machine.
+To install GUI check [gui-with-xorg](gui-with-xorg).
