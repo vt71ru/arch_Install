@@ -10,10 +10,41 @@
 #
 # reference : https://wiki.archlinux.org/index.php/Installation_guide
 
-
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
 
+echo -ne "
+__________________________________________________________________________________________________________
+|                                                                                                         |
+|                                                                                                         |
+| █████  ██████   ██████ ██   ██     ██ ███    ██ ███████ ████████  █████  ██      ██      ███████ ██████ |
+|██   ██ ██   ██ ██      ██   ██     ██ ████   ██ ██         ██    ██   ██ ██      ██      ██      ██   ██|
+|███████ ██████  ██      ███████     ██ ██ ██  ██ ███████    ██    ███████ ██      ██      █████   ██████ |
+|██   ██ ██   ██ ██      ██   ██     ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      ██      ██   ██|
+|██   ██ ██   ██  ██████ ██   ██     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████ ███████ ██   ██|
+|                                                                                                         |
+|---------------------------------------------------------------------------------------------------------|
+|                Install arch linux in few clicks. Even a 5 year kid can install arch now.                |
+|---------------------------------------------------------------------------------------------------------|
+|                               Base Installation Of Arch Linux Begins Now                                |
+|       Check: https://github.com/vt71ru/arch_install/ To Know More Details About This Installation       |
+|---------------------------------------------------------------------------------------------------------|
+|_________________________________________________________________________________________________________|
 
-#Begin install
-echo "Begin install..............."
+"
+
+sleep 3s
+echo "Internet Connection is a must to begin."
+echo "Updating Keyrings"
+sleep 2s
+pacman -Sy --needed --noconfirm archlinux-keyring
+clear
+echo "Ensuring if the system clock is accurate."
+timedatectl set-ntp true
+sleep 3s
+clear
+
+echo "generating fstab file"
+genfstab -U /mnt >> /mnt/etc/fstab
+sleep 2s
+clear
