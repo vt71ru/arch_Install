@@ -36,9 +36,31 @@ ________________________________________________________________________________
 "
 }
 
+wificonn () {
+echo  -e "Check internet connection"........
+up=`ping -c 1 -q raw.githubusercontent.com`
+case $? in
+0) echo -en "+ \033[32;1;49mInternet is available \033[0m\n"
+  echo -e "Connection aviable..."
+	;;
+*) echo -en "- \033[31;1;49mWarning! \033[0m\033[31;1;5mInternet not available \033[0m\n"
+   select conntype in Cable Wireless
+do
+  case $conntype in
+  "Cable")
+     echo "I also use $conntype connection. Check cable connection"
+     ;;
+  "Wifi")
+     iwctl --passphrase passphrase station device connect SSID
+     ;;
+done 
+   exit;;
+esac
+}
+
 init () {
 sleep 3s
-echo "Internet Connection is a must to begin."
+wificonn
 echo "Updating Keyrings"
 sleep 2s
 pacman -Sy --needed --noconfirm archlinux-keyring
@@ -70,6 +92,6 @@ clear
 }
 
 logo
-clear
+init
 genfstab
 clear
