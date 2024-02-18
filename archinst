@@ -53,8 +53,8 @@ do
   "Wifi")
      iwctl --passphrase passphrase station device connect SSID
      ;;
-done 
-   exit;;
+  esac
+done
 esac
 }
 
