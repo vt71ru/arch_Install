@@ -13,6 +13,8 @@
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
 
+logo () {
+# This will be shown on every set as user is progressing
 echo -ne "
 __________________________________________________________________________________________________________
 |                                                                                                         |
@@ -32,7 +34,9 @@ ________________________________________________________________________________
 |_________________________________________________________________________________________________________|
 
 "
+}
 
+init () {
 sleep 3s
 echo "Internet Connection is a must to begin."
 echo "Updating Keyrings"
@@ -44,7 +48,28 @@ timedatectl set-ntp true
 sleep 3s
 clear
 
+# Ставим русскую раскладку
+echo "Setting keyboard layout..."
+loadkeys ru
+
+# Добавим в консоль шрифт, поддерживающий кириллицу
+echo "Setting cyrillic font..."
+setfont ter-k20b
+
+#Добавляем русскую локаль
+sed -i 's/#ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/g' /etc/locale.gen
+locale-gen
+export LANG=ru_RU.UTF-8
+}
+
+genfstab (){
 echo "generating fstab file"
 genfstab -U /mnt >> /mnt/etc/fstab
 sleep 2s
+clear
+}
+
+logo
+clear
+genfstab
 clear
