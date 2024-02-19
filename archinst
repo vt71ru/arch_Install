@@ -42,20 +42,11 @@ select lang in English Russian
 do
   case $lang in
   "English")
-     echo "I also use $conntype connection. Check cable connection"
+     
      ;;
   "Russian")
-     # Ставим русскую раскладку
-     echo "Setting keyboard layout..."
-     loadkeys ru
-     # Добавим в консоль шрифт, поддерживающий кириллицу
-     echo "Setting cyrillic font..."
-     setfont ter-k20b
-     #Добавляем русскую локаль
-     sed -i 's/#ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/g' /etc/locale.gen
-     locale-gen
-     export LANG=ru_RU.UTF-8
-     source
+     source  ./lang/russian
+     choose_lang
      ;;
   esac
 done
