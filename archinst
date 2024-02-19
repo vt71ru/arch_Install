@@ -36,6 +36,31 @@ ________________________________________________________________________________
 "
 }
 
+chose_lang () {
+echo "Please select languale for installiation system"
+select lang in English Russian
+do
+  case $lang in
+  "English")
+     echo "I also use $conntype connection. Check cable connection"
+     ;;
+  "Russian")
+     # Ставим русскую раскладку
+     echo "Setting keyboard layout..."
+     loadkeys ru
+     # Добавим в консоль шрифт, поддерживающий кириллицу
+     echo "Setting cyrillic font..."
+     setfont ter-k20b
+     #Добавляем русскую локаль
+     sed -i 's/#ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/g' /etc/locale.gen
+     locale-gen
+     export LANG=ru_RU.UTF-8
+     source
+     ;;
+  esac
+done
+}
+
 wificonn () {
 echo  -e "Check internet connection"........
 up=`ping -c 1 -q raw.githubusercontent.com`
@@ -44,7 +69,7 @@ case $? in
   echo -e "Connection aviable..."
 	;;
 *) echo -en "- \033[31;1;49mWarning! \033[0m\033[31;1;5mInternet not available \033[0m\n"
-   select conntype in Cable Wireless
+select conntype in Cable Wireless
 do
   case $conntype in
   "Cable")
@@ -70,18 +95,6 @@ timedatectl set-ntp true
 sleep 3s
 clear
 
-# Ставим русскую раскладку
-echo "Setting keyboard layout..."
-loadkeys ru
-
-# Добавим в консоль шрифт, поддерживающий кириллицу
-echo "Setting cyrillic font..."
-setfont ter-k20b
-
-#Добавляем русскую локаль
-sed -i 's/#ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/g' /etc/locale.gen
-locale-gen
-export LANG=ru_RU.UTF-8
 }
 
 genfstab (){
@@ -92,6 +105,7 @@ clear
 }
 
 logo
+chose_lang
 init
 genfstab
 clear
