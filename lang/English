@@ -1,1 +1,6 @@
-
+msg1="Listing Block Devices"
+msg2=" Which drive would you like to install to?"
+msg3="may not be empty on your system"
+msg4="Drive:"
+msg5="Partition with"
+msg6="Tool Choice:"
