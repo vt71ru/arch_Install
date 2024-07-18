@@ -4,7 +4,7 @@
 # --------------------------------
 # author    : Virus_Man
 #             
-# project   : ArchInst
+# project   ээ: ArchInst
 #             
 # license   : LGPL-3.0 (http://opensource.org/licenses/lgpl-3.0.html)
 #
@@ -13,8 +13,13 @@
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
 
-$yourdrive=""
-$toolchoice
+yourdrive=""
+toolchoice=""
+rootpart=""
+bootpart=""
+
+hostname=""
+timezone=""
 
 # COLORS
 red=$(tput setaf 1)
