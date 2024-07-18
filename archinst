@@ -13,6 +13,12 @@
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
 
+# COLORS
+red=$(tput setaf 1)
+white=$(tput setaf 7)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+
 logo () {
 # This will be shown on every set as user is progressing
 echo -ne "
@@ -55,40 +61,29 @@ do
 done
 }
 
-wificonn () {
-echo  -e "Check internet connection"........
-up=`ping -c 1 -q raw.githubusercontent.com`
-case $? in
-0) echo -en "+ \033[32;1;49mInternet is available \033[0m\n"
-  echo -e "Connection aviable..."
-	;;
-*) echo -en "- \033[31;1;49mWarning! \033[0m\033[31;1;5mInternet not available \033[0m\n"
-select conntype in Cable Wireless
-do
-  case $conntype in
-  "Cable")
-     echo "I also use $conntype connection. Check cable connection"
-     ;;
-  "Wifi")
-     iwctl --passphrase passphrase station device connect SSID
-     ;;
-  esac
-done
-esac
-}
+#wificonn () {
+#echo  -e "Check internet connection"........
+#up=`ping -c 1 -q raw.githubusercontent.com`
+#case $? in
+#0) echo -en "+ \033[32;1;49mInternet is available \033[0m\n"
+#  echo -e "Connection aviable..."
+#	;;
+#*) echo -en "- \033[31;1;49mWarning! \033[0m\033[31;1;5mInternet not available \033[0m\n"
+#select conntype in Cable Wireless
+#do
+#  case $conntype in
+#  "Cable")
+#     echo "I also use $conntype connection. Check cable connection"
+#     ;;
+#  "Wifi")
+#     iwctl --passphrase passphrase station device connect SSID
+#     ;;
+#  esac
+#done
+#esac
+#}
 
-init () {
-sleep 3s
-#wificonn
-echo $msg1
-№echo "Updating Keyrings"
-sleep 2s
-#pacman -Sy --needed --noconfirm archlinux-keyring
-#clear
-#echo "Ensuring if the system clock is accurate."
-#timedatectl set-ntp true
-#sleep 3s
-#clear
+disk () {
 
 }
 
@@ -101,6 +96,6 @@ clear
 
 logo
 chose_lang
-init
+disk
 genfstab
 clear
