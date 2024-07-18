@@ -80,15 +80,15 @@ esac
 init () {
 sleep 3s
 #wificonn
-echo "Привет сосед"
-echo "Updating Keyrings"
+echo $msg1
+№echo "Updating Keyrings"
 sleep 2s
-pacman -Sy --needed --noconfirm archlinux-keyring
-clear
-echo "Ensuring if the system clock is accurate."
-timedatectl set-ntp true
-sleep 3s
-clear
+#pacman -Sy --needed --noconfirm archlinux-keyring
+#clear
+#echo "Ensuring if the system clock is accurate."
+#timedatectl set-ntp true
+#sleep 3s
+#clear
 
 }
 
