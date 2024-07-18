@@ -13,6 +13,8 @@
 apptitle="Arch Linux Fast Install (archinst) - Version: 2024.02.14.00.00.01 (GPLv3)"
 baseurl=https://raw.githubusercontent.com/vt71ru/arch_Install/main/archinst
 
+$yourdrive=""
+
 # COLORS
 red=$(tput setaf 1)
 white=$(tput setaf 7)
@@ -84,7 +86,11 @@ done
 #}
 
 disk () {
-
+        clear
+        printf " \033[1m ${red} $msg1 \n\n \033[0m"
+        lsblk |grep -v "loop*" |grep -v "arch_root*"
+        read yourdrive
+        echo $yourdrive
 }
 
 genfstab (){
