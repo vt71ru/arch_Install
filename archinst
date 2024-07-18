@@ -137,7 +137,7 @@ while true; do
       display_result "System Information"
       ;;
     2 )
-      result=$(df -h)
+      result=$(lsblk |grep -v "loop*" |grep -v "arch_root*")
       display_result "Disk Space"
       ;;
     3 )
