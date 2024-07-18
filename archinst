@@ -38,7 +38,7 @@ ________________________________________________________________________________
 
 chose_lang () {
 echo "Please select languale for installiation system"
-select lang in English Russian
+select lang in English Russian Quit;
 do
   case $lang in
   "English")
@@ -47,6 +47,9 @@ do
   "Russian")
      source  ./lang/russian
      choose_lang
+     ;;
+  "Quit")
+     break
      ;;
   esac
 done
@@ -76,7 +79,8 @@ esac
 
 init () {
 sleep 3s
-wificonn
+#wificonn
+echo "Привет сосед"
 echo "Updating Keyrings"
 sleep 2s
 pacman -Sy --needed --noconfirm archlinux-keyring
