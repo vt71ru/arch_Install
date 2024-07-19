@@ -181,7 +181,10 @@ clear
 
 logo
 chose_lang
-sys_info
-disk
+device_list=$(lsblk -no NAME,SIZE,TYPE,FSTYPE | egrep -v "$USB|loop[0-9]+|sr[0-9]+|fd[0-9]+" | sed 's/[^[:alnum:]_., -]//g' | column -t | sort -k 1,1 | uniq)
+device_count=$(<<<"$device_list" wc -l)
+echo $device_list
+#sys_info
+#disk
 #genfstab
-clear
+
