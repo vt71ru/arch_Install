@@ -35,9 +35,9 @@ ________________________________________________________________________________
 "
 }
 
-chose_lang () {
+init() {
 echo "Please select languale for installiation system"
-select lang in English Russian Quit;
+select lang in English Russian German Quit;
 do
   case $lang in
   "English")
@@ -47,11 +47,49 @@ do
      source  ./lang/russian
      choose_lang
      ;;
+  "German")
+     source  ./lang/german
+     choose_lang
+     ;;
   "Quit")
      break
      ;;
   esac
 done
+
+ColorOff=$'\e[0m';
+Green=$'\e[0;32m';
+Yellow=$'\e[0;33m';
+Red=$'\e[0;31m';
+
+cpu_type=$(lscpu | grep "Model name:" | cut -c 22-)
+cpu_cores=$(lscpu | grep "^CPU(s):" | cut -c 22-)
+
+if (lscpu | grep "CPU max MHz" &> /dev/null) then
+    cpu_freq=$(lscpu | grep "CPU max MHz:" | cut -c 22-)
+else
+    cpu_freq=$(lscpu | grep "CPU MHz:" | cut -c 22-)
+fi
+
+mem_total=$(free -m | awk 'NR==2 {print $2}')
+mem_used=$(free -m | awk 'NR==2 {print $3}')
+gpu_cpu=$(lspci | grep VGA | cut -c 36- | awk 'NR==1')
+gpu_dedicated=$(lspci | grep VGA | cut -c 36- | awk 'NR==2')
+block_dev=$(echo -e "${Yellow}Block Devices: \n${Green}$(lsblk | grep "sd." | awk '{print "'${Red}'> '${Green}'"$1" '${Yellow}'Type: '${Green}'"$6" '${Yellow}'Size: '${Green}'"$4" '${Green}'"$7}' | column -t | sed 's/>/    >/')")
+
+
+echo "  ${Red}|${Red}$(whoami)${Green}@${Yellow}$(</etc/hostname) ${Red}------------------------------------------------>"
+echo "  ${Red}|${Yellow}System Uptime: ${Green}$(uptime -p)"
+echo "  ${Red}|${Yellow}Kernel Version: ${Green}$kversion"
+echo "  ${Red}|${Yellow}Command Shell: ${Green}$shell"
+echo "  ${Red}|${Yellow}CPU Model: ${Green}$cpu_type"
+echo "  ${Red}|${Yellow}CPU Cores: ${Green}$cpu_cores"
+echo "  ${Red}|${Yellow}CPU Clock: ${Green}$cpu_freq MHz"
+echo "  ${Red}|${Yellow}GPU - CPU: ${Green}$gpu_cpu"
+echo "  ${Red}|${Yellow}GPU - dedicated: ${Green}$gpu_dedicated"
+echo "  ${Red}|${Yellow}Memory: ${Green}$mem_used MiB / $mem_total MiB"
+echo "  ${Red}|$block_dev"
+
 }
 
 #wificonn () {
@@ -104,10 +142,11 @@ clear
 }
 
 logo
-chose_lang
+init
 device_list=$(lsblk -no NAME,SIZE,TYPE,FSTYPE | egrep -v "$USB|loop[0-9]+|sr[0-9]+|fd[0-9]+" | sed 's/[^[:alnum:]_., -]//g' | column -t | sort -k 1,1 | uniq)
 device_count=$(<<<"$device_list" wc -l)
 echo $device_list
+echo $device_count
 #disk
 #genfstab
 
